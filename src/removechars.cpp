@@ -22,7 +22,7 @@ string remove_chars(string str, string remove) {
     return output;
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     string output = remove_chars(string("My Little Pony"), string("aeiou"));
     cout << output << endl;
