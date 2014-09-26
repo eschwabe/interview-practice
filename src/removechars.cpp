@@ -1,4 +1,5 @@
-// Remove chars from a string
+// Programming Interviews Exposed PG.94
+// Remove Specified Characters
 
 #include <string>
 #include <unordered_set>
