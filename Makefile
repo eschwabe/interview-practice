@@ -1,6 +1,7 @@
 # Build and run codejam problems
 
 PROGS= src/removechars
+PROGS+=src/stringpermutations
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
