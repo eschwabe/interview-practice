@@ -2,6 +2,7 @@
 
 PROGS= src/removechars
 PROGS+=src/stringpermutations
+PROGS+=src/stringcombinations
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
