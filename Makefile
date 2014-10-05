@@ -4,6 +4,8 @@ PROGS= src/removechars
 PROGS+=src/stringpermutations
 PROGS+=src/stringcombinations
 PROGS+=src/stablesort
+PROGS+=src/producerconsumer
+PROGS+=src/philosophers
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
