@@ -7,6 +7,7 @@ PROGS+=src/stablesort
 PROGS+=src/producerconsumer
 PROGS+=src/philosophers
 PROGS+=src/convert
+PROGS+=src/reversewords
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
