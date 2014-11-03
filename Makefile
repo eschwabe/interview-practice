@@ -9,7 +9,8 @@ PROGS+=src/philosophers
 PROGS+=src/convert
 PROGS+=src/reversewords
 PROGS+=src/zeromatrix
-PROGS+=src/libds
+PROGS+=src/libds_list
+PROGS+=src/libds_btree
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0

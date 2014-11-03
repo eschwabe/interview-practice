@@ -1,4 +1,4 @@
-// Basic data structures implemented in C++
+// Basic list data structure implemented in C++
 
 #include <memory>
 #include <iostream>
