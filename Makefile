@@ -1,4 +1,4 @@
-# Build and run codejam problems
+# Build and run practice problems
 
 PROGS= src/removechars
 PROGS+=src/stringpermutations
@@ -9,6 +9,7 @@ PROGS+=src/philosophers
 PROGS+=src/convert
 PROGS+=src/reversewords
 PROGS+=src/zeromatrix
+PROGS+=src/libds
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
@@ -38,4 +39,4 @@ check: $(PROGS)
 	done
 
 clean:
-	@rm $(PROGS) >/dev/null 2>&1 || echo "\033[0;32mCleaned\033[0m"
+	@rm -r $(PROGS) src/*.dSYM >/dev/null 2>&1 || echo "\033[0;32mCleaned\033[0m"
