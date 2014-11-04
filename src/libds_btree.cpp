@@ -18,10 +18,12 @@ private:
     std::unique_ptr<Node> right;
     int value;
   };
+  typedef std::unique_ptr<Node> NodePtr;
 
   void PrintPreOrder(Node* root, std::ostream& stream);
+  void InsertNode(NodePtr& ptr);
 
-  std::unique_ptr<Node> root_;
+  NodePtr root_;
 };
 
 BinaryTree::BinaryTree() :
@@ -56,39 +58,55 @@ void BinaryTree::Insert(const int& value) {
   }
 }
 
-bool BinaryTree::Remove(const int& value) {
+void BinaryTree::InsertNode(NodePtr& ptr) {
+  if(!ptr) {
+    return;
+  }
+  if(!root_) {
+    root_ = std::move(ptr);
+    return;
+  }
   Node* current = root_.get();
   while(current != nullptr) {
-    if(current->value >= value) {
-      if(current->left && current->left->value == value) {
-        std::unique_ptr<Node> right_tmp(std::move(current->left->right));
-        current->left = std::move(current->left->left);
-        // find place for right
-        current = current->left.get();
-        while(current != nullptr) {
-          if(!current->right) {
-            current->right = std::move(right_tmp);
-            break;
-          }
-          current = current->right.get();
-        }
+    if(current->value >= ptr->value) {
+      if(!current->left) {
+        current->left = std::move(ptr);
         break;
       }
       current = current->left.get();
     } else {
-      if(current->left && current->right->value == value) {
-        std::unique_ptr<Node> right_tmp(std::move(current->right->right));
-        current->right = std::move(current->right->left);
-        // find place for right
-        current = current->right.get();
-        while(current != nullptr) {
-          if(!current->right) {
-            current->right = std::move(right_tmp);
-            break;
-          }
-          current = current->right.get();
-        }
+      if(!current->right) {
+        current->right = std::move(ptr);
         break;
+      }
+      current = current->right.get();
+    }
+  }
+}
+
+bool BinaryTree::Remove(const int& value) {
+  Node* current = root_.get();
+  if(current->value == value) {
+    NodePtr right_tmp(std::move(current->right));
+    root_ = std::move(current->left);
+    InsertNode(right_tmp);
+    return true;
+  }
+  while(current != nullptr) {
+    if(current->value >= value) {
+      if(current->left && current->left->value == value) {
+        NodePtr right_tmp(std::move(current->left->right));
+        current->left = std::move(current->left->left);
+        InsertNode(right_tmp);
+        return true;
+      }
+      current = current->left.get();
+    } else {
+      if(current->right && current->right->value == value) {
+        NodePtr right_tmp(std::move(current->right->right));
+        current->right = std::move(current->right->left);
+        InsertNode(right_tmp);
+        return true;
       }
       current = current->right.get();
     }
@@ -145,7 +163,14 @@ int main()
   t.Remove(4);
   t.Remove(100);
   t.Remove(44);
+  t.Print(std::cout);
   t.Remove(5);
+  t.Remove(1);
+  t.Remove(3);
+  t.Remove(97);
+  t.Print(std::cout);
+  t.Insert(5);
+  t.Insert(5);
   t.Print(std::cout);
 
   return 0;
