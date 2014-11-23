@@ -1,16 +1,20 @@
 # Build and run practice problems
 
-PROGS= src/removechars
-PROGS+=src/stringpermutations
-PROGS+=src/stringcombinations
-PROGS+=src/stablesort
-PROGS+=src/producerconsumer
-PROGS+=src/philosophers
+PROGS=
+PROGS+=src/allsubsets
+PROGS+=src/anagrams
 PROGS+=src/convert
-PROGS+=src/reversewords
-PROGS+=src/zeromatrix
-PROGS+=src/libds_list
 PROGS+=src/libds_btree
+PROGS+=src/libds_list
+PROGS+=src/philosophers
+PROGS+=src/printlastlines
+PROGS+=src/producerconsumer
+PROGS+=src/reversewords
+PROGS+=src/stablesort
+PROGS+=src/stringcombinations
+PROGS+=src/stringpermutations
+PROGS+=src/zeromatrix
+PROGS+=src/removechars
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
