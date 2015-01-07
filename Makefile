@@ -15,6 +15,9 @@ PROGS+=src/stringcombinations
 PROGS+=src/stringpermutations
 PROGS+=src/zeromatrix
 PROGS+=src/removechars
+PROGS+=src/parenthesization
+PROGS+=src/random_median
+PROGS+=src/towers
 
 CXX=g++
 CXXFLAGS=-Wall -Werror -std=c++11 -g -O0
