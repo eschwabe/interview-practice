@@ -1,5 +1,6 @@
 #include <string>
 #include <unordered_map>
+#include <stack>
 #include <iostream>
 
 using namespace std;
@@ -7,30 +8,25 @@ using namespace std;
 class Solution {
 public:
     bool isValid(string s) {
-        return isValidHelper(s, 0, '\0');
-    }
-
-    bool isValidHelper(string s, int start, char target) {
 
         unordered_map<char, char> close_parens;
         close_parens['('] = ')';
         close_parens['{'] = '}';
         close_parens['['] = ']';
 
-        for(int i = start; i<s.size(); ++i) {
-            if(s[i]=='(' || s[i] =='{' || s[i]=='[') {
-                if(!isValidHelper(s, start+1, close_parens[s[i]])) {
+        stack<char> parens;
+
+        for(auto c : s) {
+            if(c == '(' || c =='{' || c == '[') {
+                parens.push(close_parens[c]);
+            } else if(c ==')' || c == '}' || c == ']') {
+                if(parens.size() == 0 || parens.top() != c) {
                     return false;
                 }
-            } else if(s[i]==')' || s[i]=='}' || s[i]==']') {
-                if(s[i] == target) {
-                    return true;
-                } else {
-                    return false;
-                }
+                parens.pop();
             }
         }
-        if(target == '\0') {
+        if(parens.size() == 0) {
             return true;
         } else {
             return false;
