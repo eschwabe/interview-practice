@@ -1,5 +1,5 @@
 /**
- * Coursera - Algorithms Part II
+ * Coursera - Algorithms Part I
  * Week 1 - Interview Questions - Union Find
  *
  * Question 1: Social network connectivity
