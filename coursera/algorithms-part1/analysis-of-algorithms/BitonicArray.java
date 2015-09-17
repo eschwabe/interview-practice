@@ -20,73 +20,53 @@
  * 1) Locate the point in the array where ascending switchines to descending
  * 2) Perform binary search on each half of the array for the target integer
  *
- * Note: Code below is an unoptomized example solution. Does not handle many
- * edge cases.
  */
 
 class BitonicArray {
 
-  private static boolean binarySearchAsc(int[] array, int start, int end, int target) {
-    int mid = ((end - start) / 2) + start;
+  private static boolean bitonicSearch(int[] array, int start, int end, int target, boolean desc) {
+    int mid = (start + end) / 2;
     if (array[mid] == target) {
       return true;
-    } else if (array[mid] > target && start != mid) {
-      return binarySearchAsc(array, start, mid-1, target);
-    } else if (array[mid] < target && start != mid) {
-      return binarySearchAsc(array, mid+1, end, target);
-    } else {
+    }
+    if (start > end) {
       return false;
     }
-  }
 
-  private static boolean binarySearchDesc(int[] array, int start, int end, int target) {
-    int mid = ((end - start) / 2) + start;
-    if (array[mid] == target) {
-      return true;
-    } else if (array[mid] < target && start != mid) {
-      return binarySearchDesc(array, start, mid-1, target);
-    } else if (array[mid] > target && start != mid) {
-      return binarySearchDesc(array, mid+1, end, target);
+    if ((desc && array[mid] < target) || (!desc && array[mid] > target)) {
+      return bitonicSearch(array, start, mid-1, target, desc);
     } else {
-      return false;
+      return bitonicSearch(array, mid+1, end, target, desc);
     }
   }
 
   private static int binarySearchPeak(int[] array, int start, int end) {
-    int mid = ((end - start) / 2) + start;
-    if (array[mid] > array[mid-1] && array[mid] > array[mid+1]) {
+    int mid = (start + end) / 2;
+    if (start == end) {
       return mid;
-    } else if (start == end) {
-      return -1;
-    } else if (array[mid] > array[mid+1]) {
-      return binarySearchPeak(array, start, mid-1);
     } else if (array[mid] < array[mid+1]) {
       return binarySearchPeak(array, mid+1, end);
     } else {
-      return -1;
+      return binarySearchPeak(array, start, mid);
     }
   }
 
   private static boolean find(int[] array, int peak, int target) {
-    return binarySearchAsc(array, 0, peak, target) ||
-      binarySearchDesc(array, peak+1, array.length-1, target);
+    return bitonicSearch(array, 0, peak, target, false) ||
+      bitonicSearch(array, peak, array.length-1, target, true);
   }
 
   public static void main(String[] args) {
-    int[] array = { 1, 2, 3, 4, 5, 10, 9, 8, 7, 6 };
+    int[] array = { 1, 2, 3, 4, 5, 15, 10, 9, 8, 7, 6 };
     int target = 0;
 
     int peak = binarySearchPeak(array, 0, array.length-1);
-    if (peak == -1) {
-      System.out.println("Invalid bitonic array");
-    } else {
-      System.out.println(target + ": " + find(array, peak, target));
-      target = 1;
-      System.out.println(target + ": " + find(array, peak, target));
-      target = 8;
-      System.out.println(target + ": " + find(array, peak, target));
-      target = 20;
-      System.out.println(target + ": " + find(array, peak, target));
-    }
+    System.out.println(target + ": " + find(array, peak, target));
+    target = 1;
+    System.out.println(target + ": " + find(array, peak, target));
+    target = 8;
+    System.out.println(target + ": " + find(array, peak, target));
+    target = 20;
+    System.out.println(target + ": " + find(array, peak, target));
   }
 }
