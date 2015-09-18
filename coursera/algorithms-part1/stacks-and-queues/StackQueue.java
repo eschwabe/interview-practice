@@ -8,6 +8,18 @@
  * constant amortized number of stack operations.
  */
 
+/**
+ * Solution:
+ *
+ * Use one stack for keeping track of elements queued up and another for
+ * tracking elements to be dequeued. When the dequeue stack if empty, the
+ * elements from the enqueue stack are popped and pushed into the dequeue
+ * stack. This operation reverses the order of elements so they are in FIFO.
+ *
+ * The dequeue stack cannot be populated until depleated, otherwise elements
+ * would be out of order.
+ */
+
 import java.util.Stack;
 
 class StackQueue<Item> {
