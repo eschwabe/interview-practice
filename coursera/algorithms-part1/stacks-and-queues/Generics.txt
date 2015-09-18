@@ -1,0 +1,16 @@
+Coursera - Algorithms Part I
+
+Week 2 - Interview Questions - Stacks and Queues
+
+Question 3: Java generics
+Explain why Java prohibits generic array creation.
+
+Java generics are a compile time only type check. The type is "erased" during
+compilation and a result the runtime does not know what type a generic object is.
+Creating a generic array would mean the runtime cannot know the type of the array.
+This would mean the runtime cannot perform type safety checks. This is not a
+problem for other generic objects since they have their base type.
+
+ArrayList<String> has the same type as ArrayList<Int>
+
+http://www.angelikalanger.com/GenericsFAQ/FAQSections/ParameterizedTypes.html#FAQ104
