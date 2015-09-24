@@ -1,0 +1,46 @@
+Coursera - Algorithms Part I
+Week 2 - Interview Questions - Stacks and Queues
+
+Question 5: Clone a linked structure with two pointers per node. Suppose that
+you are given a reference to the first node of a linked structure where each
+node has two pointers: one pointer to the next node in the sequence (as in a
+standard singly-linked list) and one pointer to an arbitrary node.
+
+Design a linear-time algorithm to create a copy of the doubly-linked structure.
+You may modify the original linked structure, but you must end up with two
+copies of the original.
+
+private class Node {
+  private String item;
+  private Node next;
+  private Node random;
+}
+
+
+Solution:
+
+The structure can be cloned in linear time by temporarily modifying the original
+nodes to point to the new nodes. The new nodes will also need to temporarily
+keep track of the original nodes next pointers, allowing the pointers to be
+restored as the random pointers are established in the new structure.
+
+The psuedocode for the order of operations:
+
+
+# initialize cloned structure with a root
+create clone of root as prev
+
+# create clone of each following node from original structure and cross-link
+for each node in original:
+  create clone node
+  set prev.next = clone
+  set clone.item = orig.item
+  set clone.random = orig.next
+  set orig.next = clone
+  prev = clone
+
+# make another pass through original structure resolving random pointers for cloned structure
+for each node in original:
+  tmpPointer = orig.next.random         # original next pointer
+  orig.next.random = orig.random.next   # following original random pointer to find clone random pointer
+  orig.next = tmpPointer                # restore original next pointer
