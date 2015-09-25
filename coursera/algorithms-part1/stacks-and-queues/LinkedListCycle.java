@@ -39,27 +39,25 @@ class LinkedListCycle {
     }
 
     Node p1 = root;
-    Node p2 = root.next.next;
+    Node p2 = root;
 
     // find cycle in loop where pointers cross
     // p1 increments one node per iteration
     // p2 increments two nodes per iteration
-    while (p1 != p2 && p1.next != p2) {
+    do {
       if (p1 == null || p2 == null || p2.next == null) {
         return null;
       }
       p1 = p1.next;
       p2 = p2.next.next;
-    }
+    } while (p1 != p2);
 
-    // find cycle start by continuing to iterate until p2 crosses the original
-    // original cross point is half way through cycle
-    // p1 will end up at first node in cycle
-    Node cross = p1;
-    System.out.println("Cross: " + cross.value);
-    while (p2 != cross && p2.next != cross) {
+    // find cycle start by resetting p1 to beginning
+    // increment pointers until they meet again
+    p1 = root;
+    while (p1 != p2) {
       p1 = p1.next;
-      p2 = p2.next.next;
+      p2 = p2.next;
     }
 
     return p1;
@@ -79,7 +77,7 @@ class LinkedListCycle {
       current.next = newNode;
       current = newNode;
       ++count;
-      if (count == 9) {
+      if (count == 3) {
         cycle = current;
       }
     }
