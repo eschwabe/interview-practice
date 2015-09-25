@@ -1,0 +1,28 @@
+Coursera - Algorithms Part I
+Week 2 - Interview Questions - Elementary Sorts
+
+Question 1: Intersection of two sets
+Given two arrays a[] and b[], each containing N distinct 2D points in the plane,
+design a subquadratic algorithm to count the number of points that are contained
+both in array a[] and array b[].
+
+
+Solution:
+
+class Point {
+  private int x;
+  private int y;
+}
+
+Duplicate points can be detected by comparing the x and y coordinates of each
+points. A brute force approach would involve checking each point in a[] against
+each other point in b[]. This requires O(N^2) time, which does not meet the
+requires.
+
+A more optimal solution sorts the two arrays by their coordinates (x then y).
+After sorting, a linear scan over each array simultaneously will allow
+duplicates to be detected. The iteration requires only incrementing the position
+within the array with the smallest point.
+
+Alternatively, the arrays would be concatenated and sorted. Then, duplicate
+points will be sorted next to each other.
